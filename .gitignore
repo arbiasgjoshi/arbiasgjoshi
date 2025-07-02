@@ -44,6 +44,6 @@ next-env.d.ts
 *.swp
 *.swo
 
-PROMPT_PROJECT.md
+/PROMPT_PROJECT.md
 
 
