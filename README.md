@@ -6,15 +6,23 @@ I work mostly in the interface, and I treat that interface as part of the system
 
 ## Now
 
-At [Manta](https://manta.eu/) I build the product surface of a reasoning engine. It keeps a per-tenant knowledge graph, derives what should happen next, and proposes an action plan. A person approves it. The system then acts in the customer’s own tools and keeps the reason.
+At [Manta](https://manta.eu/) (Oslo, remote) I work on the Co-pilot, the customer-facing agent, and I led initiatives there. Travel and real-estate teams use it: Journey.travel, Newbuilds, Plot.AI, and Immobilière 3F.
 
-What I own there:
+The agent proposes an action plan. A person approves, rejects, or skips each step. I took that from prototype to release, including an admin view across customers. While it runs, the screen shows live progress. People attach files and images. Partner brands embed it white-label, and the same assistant ships as an SDK, already inside the Journey.travel app, with the developer docs.
 
-- Copilot views that stream, and tool calls shown while they happen
-- Action plans with execution state, progress, and an activity log
-- Knowledge-graph exploration: typed nodes, ego-graphs, and type summaries
-- SHACL forms for editing the graph, with shape selection and RDFox-backed queries
-- The campaign workflows the agent acts through, across Meta, Google, and Snapchat
+EU customers run Anthropic Claude on Google Cloud Vertex AI in the EU, so the data stays inside the region the contract requires. Journey.travel’s agent runs on Claude Opus 5.5. The Journey.travel app itself sits on Cloudflare Workers, with storage kept in the EU.
+
+The assistant is grounded in what the user is looking at. It waits until the data has loaded, and it holds up on very large customer datasets. Beside the chat, I built views that explain how the business rules reached a decision, with personal data masked, and I redesigned the interactive data-graph.
+
+On Marketer.com, the same engagement before the Co-pilot, I shipped the first AI features: campaign suggestions with one-click actions, and an agent dashboard. I built the campaign ordering flows for Meta Advantage+, Google Performance Max, and Snapchat, with live ad previews and automated tests. Around that: the asset library, product analytics, the v4 design system, and a pass on the first chat agent with a stop-generation control and theming.
+
+I also introduced AI code review and shared Cursor rules across the repos.
+
+## With a client
+
+For two months I sat with the Newbuilds.com team, sent from Manta, and moved the product off Marketer.tech. Front end, backend, Cloudflare, and the deploy path: ninety-plus tasks, with a person reviewing every change before it shipped.
+
+The team’s coding agents ran on a Hetzner box, up to twenty Claude Code and Codex sessions at once, taking tasks from the tracker and restarting the ones that stalled. Shared agent rules, automated tests, and limits on what an agent is allowed to run. One feature from that stretch is a post editor with live feed, email, and SMS previews, built before the backend APIs existed.
 
 ## How I engineer
 
@@ -22,21 +30,13 @@ I start from the decision a person has to make, and I build backwards until that
 
 The bugs I go after are a step that ran, a value that changed, and no record of which rule caused it. A screen that looks finished and cannot explain itself is unfinished.
 
-I have led platforms as well as features. Design systems, state machines, end-to-end coverage, performance, and the pipeline that ships them. The long stretches were leading frontend at Zetta and at Justt. The work now is the agent surface above that craft.
+I have led platforms as well as features. Design systems, state machines, end-to-end coverage, performance, and the pipeline that ships them. The long stretches were leading frontend at Zetta and at Justt. Day to day I work in Claude Code, with the review and the repo rules treated as part of the build.
 
 I would rather ship a plan someone can refuse than an answer they have to take on trust.
 
-## Proof
-
-**Agent loop.** Streaming responses, tool-call rendering, and action plans a person can follow while they run.
-
-**Graph, with a contract.** Views over typed entities, and forms that edit the graph against its SHACL shapes instead of a one-off schema.
-
-**A workflow with a live consequence.** Multi-step campaign tools, catalogs, and validation, in a product where a bad step changes a real ad account.
-
 ## Stack
 
-TypeScript, React, Vue, Nuxt. React Flow for graph UI. RDF, SHACL, and RDFox in product code, not as a side interest. Zustand, XState, GraphQL. Playwright and Cypress. AWS and GitHub Actions.
+TypeScript, React, Next.js, Vue, and Nuxt. Vercel AI SDK, streaming, and tool calling. Google Cloud Vertex AI and Cloudflare AI Gateway. Cloudflare Workers. AWS (S3, CloudFront, Lambda). RDF, SPARQL, SHACL, and RDFox. GraphQL, React Flow, Zustand, and XState. Playwright and Cypress. GitHub Actions.
 
 ## Elsewhere
 
